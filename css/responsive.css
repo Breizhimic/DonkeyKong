@@ -1,0 +1,113 @@
+/* ============================
+   DONKEY KONG — RESPONSIVE.CSS
+   ============================ */
+
+/* ── Desktop large (>= 900px) ── */
+@media (min-width: 900px) {
+  #mobile-controls { display: none !important; }
+  #canvas-wrapper  { margin-bottom: 0; }
+  #btn-pause       { display: flex; }
+
+  /* Canvas fits vertically: HUD=64px */
+  #game-canvas {
+    width:  auto;
+    height: calc(100dvh - 70px);
+    max-width: 90vw;
+  }
+}
+
+/* ── Tablet (480–899px) ── */
+@media (max-width: 899px) and (min-width: 480px) {
+  #mobile-controls { display: none !important; }
+
+  #game-canvas {
+    width:  auto;
+    height: calc(100dvh - 70px);
+    max-width: 95vw;
+  }
+
+  .hud-label  { font-size: 5px; }
+  .hud-value  { font-size: 9px; }
+  #hud        { padding: 0 10px; gap: 10px; }
+
+  .overlay-box   { padding: 28px 20px; }
+  .screen-title  { font-size: 16px; }
+  .stat-row      { font-size: 7px; }
+
+  .howto-content  { flex-direction: column; align-items: center; }
+  .howto-section  { min-width: 260px; }
+}
+
+/* ── Mobile (<= 479px) ── */
+@media (max-width: 479px) {
+  #mobile-controls { display: flex; }
+
+  #hud {
+    height: 64px;
+    padding: 0 8px;
+    gap: 0;
+  }
+
+  .hud-left, .hud-center, .hud-right { gap: 10px; }
+  .hud-label  { font-size: 6px; }
+  .hud-value  { font-size: 11px; }
+  .hud-level  { font-size: 16px; }
+
+  #canvas-wrapper { margin-top: 64px; margin-bottom: 140px; }
+
+  #game-canvas {
+    width:  100vw;
+    height: auto;
+    max-height: calc(100dvh - 64px - 140px);
+  }
+
+  .overlay-box {
+    padding: 24px 16px;
+    width: 95%;
+    gap: 12px;
+  }
+
+  .screen-title { font-size: 13px; letter-spacing: 2px; }
+  .stat-row     { font-size: 7px;  padding: 5px 8px; }
+
+  .btn-arcade {
+    font-size: 8px;
+    padding: 12px 20px;
+    min-width: 170px;
+  }
+
+  .title-dk   { font-size: 26px; }
+  .title-kong { font-size: 22px; }
+  .title-gorilla { font-size: 52px; }
+
+  .menu-buttons { gap: 10px; }
+  .howto-content { flex-direction: column; }
+  .howto-section { min-width: auto; width: 100%; }
+
+  .score-popup { font-size: 9px; }
+  .score-popup.big { font-size: 13px; }
+
+  #btn-pause {
+    top: 6px; right: 6px;
+    width: 30px; height: 30px;
+    font-size: 12px; display: flex;
+  }
+}
+
+/* ── Landscape phone ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  #hud { height: 38px; }
+  .hud-value  { font-size: 7px; }
+  .hud-label  { font-size: 4px; }
+
+  #mobile-controls { height: 110px; }
+  .dpad-btn  { width: 40px; height: 34px; font-size: 12px; }
+  .jump-btn  { width: 68px; height: 68px; font-size: 8px; }
+  .dpad-center { width: 34px; height: 34px; }
+
+  #canvas-wrapper { margin-top: 64px; margin-bottom: 110px; }
+  #game-canvas {
+    height: calc(100dvh - 64px - 110px);
+    width: auto;
+  }
+}

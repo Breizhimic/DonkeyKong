@@ -1,0 +1,154 @@
+/* ============================
+   DONKEY KONG — ANIMATIONS.CSS
+   ============================ */
+
+/* Title animations */
+@keyframes title-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes gorilla-bounce {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* Blink for "INSERT COIN" */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* CRT screen flicker */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.97; }
+  94% { opacity: 1; }
+  96% { opacity: 0.99; }
+  97% { opacity: 1; }
+}
+
+/* Score popup float */
+@keyframes score-float {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  20%  { transform: translateY(-10px) scale(1.2); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(-60px) scale(0.8); opacity: 0; }
+}
+
+/* Pop in for overlays */
+@keyframes pop-in {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.1) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Level transition */
+@keyframes level-transition-anim {
+  0%   { opacity: 0; background: rgba(0,0,0,0); }
+  15%  { opacity: 1; background: rgba(0,0,0,0.85); }
+  70%  { opacity: 1; background: rgba(0,0,0,0.85); }
+  100% { opacity: 0; background: rgba(0,0,0,0); }
+}
+
+/* Screen shake */
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-4px, -2px); }
+  20%  { transform: translate(4px, 2px); }
+  30%  { transform: translate(-3px, 3px); }
+  40%  { transform: translate(3px, -3px); }
+  50%  { transform: translate(-2px, 2px); }
+  60%  { transform: translate(2px, -2px); }
+  70%  { transform: translate(-1px, 1px); }
+  80%  { transform: translate(1px, -1px); }
+}
+
+.screen-shake {
+  animation: screen-shake 0.4s ease-in-out;
+}
+
+/* Death flash */
+@keyframes death-flash {
+  0%, 100% { filter: brightness(1); }
+  25%  { filter: brightness(3) saturate(0); }
+  50%  { filter: brightness(1); }
+  75%  { filter: brightness(3) saturate(0); }
+}
+
+.death-flash {
+  animation: death-flash 0.5s ease-in-out;
+}
+
+/* Glow pulse for elements */
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 5px #FF8C00); }
+  50%      { filter: drop-shadow(0 0 15px #FF8C00) drop-shadow(0 0 30px #FF4500); }
+}
+
+@keyframes glow-pulse-cyan {
+  0%, 100% { filter: drop-shadow(0 0 5px #00d4ff); }
+  50%      { filter: drop-shadow(0 0 15px #00d4ff) drop-shadow(0 0 30px #0088ff); }
+}
+
+/* Combo popup */
+@keyframes combo-pop {
+  0%   { transform: scale(0.5) translateY(20px); opacity: 0; }
+  40%  { transform: scale(1.3) translateY(-5px); opacity: 1; }
+  70%  { transform: scale(1) translateY(0); }
+  85%  { opacity: 1; }
+  100% { transform: scale(0.8) translateY(-30px); opacity: 0; }
+}
+
+/* Button hover glow */
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(0,212,255,0.3); }
+  50%      { box-shadow: 0 0 20px rgba(0,212,255,0.7), 0 0 40px rgba(0,212,255,0.3); }
+}
+
+.btn-arcade:hover {
+  animation: btn-glow 1.5s ease-in-out infinite;
+}
+
+/* HUD value update flash */
+@keyframes hud-flash {
+  0%   { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+  100% { color: var(--accent-yellow); text-shadow: var(--glow-yellow); }
+}
+
+.hud-flash {
+  animation: hud-flash 0.4s ease-out;
+}
+
+/* Barrel roll spin - used via canvas but referenced for DOM overlays */
+@keyframes barrel-roll {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Princess wave */
+@keyframes princess-wave {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* Kong throw */
+@keyframes kong-throw {
+  0%   { transform: scaleX(1); }
+  30%  { transform: scaleX(1) translateX(-5px); }
+  60%  { transform: scaleX(-1) translateX(5px); }
+  100% { transform: scaleX(1); }
+}
+
+/* Victory spin */
+@keyframes victory-spin {
+  from { transform: rotate(0deg) scale(1); }
+  to   { transform: rotate(360deg) scale(1.2); }
+}
+
+/* Confetti fall */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}

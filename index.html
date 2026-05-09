@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DONKEY KONG</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0e27'/><text x='2' y='26' font-size='26'>🦍</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <!-- CRT Scan Lines Overlay -->
+  <div class="crt-overlay"></div>
+  <div class="vignette"></div>
+
+  <!-- MENU SCREEN -->
+  <div id="menu-screen" class="screen active">
+    <div class="menu-title-wrapper">
+      <div class="menu-subtitle">NINTENDO © 1981</div>
+      <h1 class="menu-title">
+        <span class="title-dk">DONKEY</span>
+        <span class="title-kong">KONG</span>
+      </h1>
+      <div class="title-gorilla">🦍</div>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn-arcade" id="btn-start">▶ PLAY GAME</button>
+      <button class="btn-arcade secondary" id="btn-howto">? HOW TO PLAY</button>
+    </div>
+    <div class="menu-scores">
+      <div class="score-item">
+        <span class="score-label">BEST SCORE</span>
+        <span class="score-value" id="menu-best-score">000000</span>
+      </div>
+    </div>
+    <div class="menu-controls-hint">
+      <span>←→QD DÉPLACER</span>
+      <span>↑↓ZS ÉCHELLE</span>
+      <span>ESPACE SAUT</span>
+    </div>
+    <div class="menu-footer">INSERT COIN TO START</div>
+  </div>
+
+  <!-- HOW TO PLAY SCREEN -->
+  <div id="howto-screen" class="screen">
+    <h2 class="screen-title">HOW TO PLAY</h2>
+    <div class="howto-content">
+      <div class="howto-section">
+        <div class="howto-icon">🕹️</div>
+        <h3>CONTROLS</h3>
+        <p>← → Flèches / Q D : Déplacer</p>
+        <p>↑ Flèche / Z : Monter l'échelle</p>
+        <p>↓ Flèche / S : Descendre</p>
+        <p>ESPACE : Sauter</p>
+      </div>
+      <div class="howto-section">
+        <div class="howto-icon">🎯</div>
+        <h3>OBJECTIVE</h3>
+        <p>Climb to the top</p>
+        <p>Reach the Princess!</p>
+        <p>Avoid barrels from Kong</p>
+        <p>Jump over barrels for bonus!</p>
+      </div>
+      <div class="howto-section">
+        <div class="howto-icon">🏆</div>
+        <h3>SCORING</h3>
+        <p>Avoid barrel: +100 pts</p>
+        <p>Jump barrel: +500 pts</p>
+        <p>Level complete: +5000 pts</p>
+        <p>Combo x3+: x2 multiplier!</p>
+      </div>
+    </div>
+    <button class="btn-arcade" id="btn-back">← BACK</button>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="screen">
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-group">
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <span class="hud-value" id="hud-score">000000</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">BEST</span>
+          <span class="hud-value hud-best" id="hud-best">000000</span>
+        </div>
+      </div>
+
+      <div class="hud-group hud-center-group">
+        <div class="hud-item hud-item-level">
+          <span class="hud-label">LEVEL</span>
+          <span class="hud-value hud-level" id="hud-level">1</span>
+        </div>
+        <div class="hud-divider"></div>
+        <div class="hud-item">
+          <span class="hud-label">TIME</span>
+          <span class="hud-value hud-time-val" id="hud-time">120</span>
+        </div>
+      </div>
+
+      <div class="hud-group">
+        <div class="hud-item">
+          <span class="hud-label">LIVES</span>
+          <span class="hud-value hud-lives-val" id="hud-lives">❤️❤️❤️</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">COMBO</span>
+          <span class="hud-value combo-display" id="hud-combo">x1</span>
+        </div>
+        <button id="btn-pause" title="Pause">⏸</button>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <div id="canvas-wrapper">
+      <canvas id="game-canvas"></canvas>
+      <!-- Score popups layer -->
+      <div id="score-popups"></div>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="mobile-controls">
+      <div class="dpad">
+        <button class="dpad-btn dpad-up" id="btn-up">▲</button>
+        <div class="dpad-middle">
+          <button class="dpad-btn dpad-left" id="btn-left">◄</button>
+          <div class="dpad-center"></div>
+          <button class="dpad-btn dpad-right" id="btn-right">►</button>
+        </div>
+        <button class="dpad-btn dpad-down" id="btn-down">▼</button>
+      </div>
+      <button class="jump-btn" id="btn-jump">JUMP</button>
+    </div>
+
+  <!-- PAUSE SCREEN -->
+  <div id="pause-screen" class="screen overlay-screen">
+    <div class="overlay-box">
+      <h2 class="screen-title">PAUSED</h2>
+      <button class="btn-arcade" id="btn-resume">▶ RESUME</button>
+      <button class="btn-arcade secondary" id="btn-restart">↺ RESTART LEVEL</button>
+      <button class="btn-arcade secondary" id="btn-menu-from-pause">⌂ MAIN MENU</button>
+    </div>
+  </div>
+
+  <!-- LEVEL COMPLETE SCREEN -->
+  <div id="levelcomplete-screen" class="screen overlay-screen">
+    <div class="overlay-box">
+      <div class="level-complete-anim">🎉</div>
+      <h2 class="screen-title cyan">LEVEL COMPLETE!</h2>
+      <div class="stats-grid">
+        <div class="stat-row"><span>LEVEL SCORE</span><span id="stat-score">0</span></div>
+        <div class="stat-row"><span>TIME BONUS</span><span id="stat-time">0</span></div>
+        <div class="stat-row"><span>BARRELS JUMPED</span><span id="stat-jumped">0</span></div>
+        <div class="stat-row"><span>BEST COMBO</span><span id="stat-combo">x1</span></div>
+        <div class="stat-row total"><span>TOTAL</span><span id="stat-total">0</span></div>
+      </div>
+      <button class="btn-arcade" id="btn-next-level">NEXT LEVEL ▶</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="gameover-screen" class="screen overlay-screen">
+    <div class="overlay-box">
+      <div class="gameover-anim">💀</div>
+      <h2 class="screen-title red">GAME OVER</h2>
+      <div class="stats-grid">
+        <div class="stat-row"><span>FINAL SCORE</span><span id="go-score">0</span></div>
+        <div class="stat-row"><span>BEST SCORE</span><span id="go-best">0</span></div>
+        <div class="stat-row"><span>LEVEL REACHED</span><span id="go-level">1</span></div>
+        <div class="stat-row"><span>BARRELS JUMPED</span><span id="go-jumped">0</span></div>
+      </div>
+      <button class="btn-arcade" id="btn-try-again">↺ TRY AGAIN</button>
+      <button class="btn-arcade secondary" id="btn-menu-from-go">⌂ MAIN MENU</button>
+    </div>
+  </div>
+
+  <!-- Level transition -->
+  <div id="level-transition">
+    <div class="level-text" id="level-transition-text">LEVEL 1</div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/platforms.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/pickups.js"></script>
+  <script src="js/barrels.js"></script>
+  <script src="js/kong.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/collision.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/level.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
